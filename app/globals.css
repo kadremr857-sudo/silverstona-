@@ -1,0 +1,530 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap");
+@import "tailwindcss";
+
+/* ════════════════════════════════════════════════════════════
+   OBSIDIAN FORGE – Design System
+   Surface Philosophy: Tonal Transitions, No Borders
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Surface Hierarchy ── */
+  --surface-lowest:   #0e0e0e;   /* Global background */
+  --surface-low:      #1c1b1b;   /* Primary layout blocks / Bento cards */
+  --surface:          #131313;   /* Glass base */
+  --surface-bright:   #3a3939;   /* Active input bg */
+  --surface-high:     #2a2a2a;   /* Hover states / active cards */
+  --surface-highest:  #353534;   /* Nested elevated elements */
+
+  /* ── Primary (Cyan/AI) ── */
+  --primary-container: #00f0ff;
+  --primary-fixed-dim: #00dbe9;
+  --primary:           #dbfcff;
+  --on-primary:        #00363a;
+
+  /* ── Secondary (Purple/Live) ── */
+  --secondary-container: #9d05ff;
+  --secondary:           #dfb7ff;
+  --secondary-fixed:     #dfb7ff;
+  --secondary-fixed-dim: #dfb7ff;
+
+  /* ── Tertiary (Silver/Headlines) ── */
+  --tertiary: #f1f6ff;
+
+  /* ── Outlines ── */
+  --outline:         #849495;
+  --outline-variant: #3b494b;
+
+  /* ── Text ── */
+  --on-surface:         #e5e2e1;
+  --on-surface-variant: #b9cacb;
+}
+
+/* ────────────────────────────────────────────
+   Tailwind v4 theme tokens
+   ──────────────────────────────────────────── */
+@theme inline {
+  --color-background: #0e0e0e;
+  --color-foreground: #e5e2e1;
+
+  --color-surface-lowest:  #0e0e0e;
+  --color-surface-low:     #1c1b1b;
+  --color-surface-base:    #131313;
+  --color-surface-bright:  #3a3939;
+  --color-surface-high:    #2a2a2a;
+  --color-surface-highest: #353534;
+
+  --color-primary-container: #00f0ff;
+  --color-primary-fixed-dim: #00dbe9;
+  --color-primary:           #dbfcff;
+  --color-on-primary:        #00363a;
+
+  --color-secondary-container: #9d05ff;
+  --color-secondary:           #dfb7ff;
+  --color-secondary-fixed:     #dfb7ff;
+
+  --color-outline:         #849495;
+  --color-outline-variant: #3b494b;
+
+  --color-on-surface:         #e5e2e1;
+  --color-on-surface-variant: #b9cacb;
+
+  /* Legacy brand – kept for GlowingEffect */
+  --color-brand-400: #00dbe9;
+  --color-brand-500: #00f0ff;
+  --color-brand-600: #00c8d4;
+  --color-brand-700: #009aa5;
+  --color-brand-800: #006970;
+  --color-brand-900: #003c42;
+  --color-dark-900:  #0e0e0e;
+  --color-dark-800:  #1c1b1b;
+  --color-dark-700:  #2a2a2a;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-headline: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ────────────────────────────────────────────
+   Base
+   ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--surface-lowest);
+  color: var(--on-surface-variant);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Obsidian Forge: never use pure white for body */
+p, li, span { color: var(--on-surface-variant); }
+
+::selection {
+  background-color: rgba(0, 240, 255, 0.2);
+  color: var(--on-surface);
+}
+
+/* ────────────────────────────────────────────
+   Typography Helpers
+   ──────────────────────────────────────────── */
+.font-headline {
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Display / Hero text — Plus Jakarta Sans tighter kern */
+.display-xl {
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2.75rem, 6vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+/* CHROME GRADIENT — from tertiary (#f1f6ff) → outline (#849495) → tertiary */
+.chrome-text {
+  background: linear-gradient(135deg, #f1f6ff 0%, #849495 45%, #f1f6ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* SILVER TECH GRADIENT – for premium headers */
+.silver-gradient {
+  background: linear-gradient(90deg, #f1f6ff 0%, #849495 50%, #c8d0d1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Labels – serialized machine-coded aesthetic */
+.label-tag {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--outline);
+}
+
+/* ────────────────────────────────────────────
+   Glassmorphism – The "Glass & Gradient" Rule
+   Base: surface (#131313) at 60% + blur(20px)
+   ──────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(19, 19, 19, 0.60);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  /* Ghost Border fallback */
+  border: 1px solid rgba(59, 73, 75, 0.15);
+}
+
+.glass-panel-dark {
+  background: rgba(14, 14, 14, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 73, 75, 0.12);
+}
+
+/* ────────────────────────────────────────────
+   Ambient Shadow – tinted primary_container at 8%
+   ──────────────────────────────────────────── */
+.ambient-glow {
+  box-shadow: 0 0 50px 0 rgba(0, 240, 255, 0.08);
+}
+
+.cyber-glow {
+  box-shadow: 0 0 60px rgba(0, 240, 255, 0.10), 0 0 120px rgba(0, 240, 255, 0.04);
+}
+
+/* ────────────────────────────────────────────
+   Navbar – Glassmorphism floating
+   ──────────────────────────────────────────── */
+#navbar {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.04);
+}
+
+/* ────────────────────────────────────────────
+   Hero Section
+   ──────────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-lowest);
+}
+
+/* Laser sight accent – primary_container as high-contrast focal point */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  left: -120px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle at center,
+    rgba(0, 240, 255, 0.07) 0%,
+    rgba(0, 240, 255, 0.02) 40%,
+    transparent 70%);
+  pointer-events: none;
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  bottom: -80px;
+  right: -80px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at center,
+    rgba(157, 5, 255, 0.06) 0%,
+    transparent 60%);
+  pointer-events: none;
+}
+
+/* ────────────────────────────────────────────
+   BENTO CARDS
+   Surface: surface_container_low (#1c1b1b)
+   No dividers, no borders — use tonal depth
+   Radius: xl (1.5rem)
+   ──────────────────────────────────────────── */
+.bento-card {
+  background: var(--surface-low);   /* #1c1b1b */
+  border-radius: 1.75rem;
+  transition:
+    background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover → surface_container_high (#2a2a2a) */
+.bento-card:hover {
+  background: var(--surface-high);
+}
+
+/* Accent glows on hover (replaces hard borders) */
+.bento-card.accent-cyan:hover {
+  box-shadow: inset 0 0 0 1px rgba(0, 240, 255, 0.12),
+              0 0 40px rgba(0, 240, 255, 0.08);
+}
+.bento-card.accent-purple:hover {
+  box-shadow: inset 0 0 0 1px rgba(157, 5, 255, 0.2),
+              0 0 40px rgba(157, 5, 255, 0.08);
+}
+.bento-card.accent-teal:hover {
+  box-shadow: inset 0 0 0 1px rgba(0, 219, 233, 0.15),
+              0 0 40px rgba(0, 219, 233, 0.08);
+}
+
+/* Service card wrapper – ambient float shadow on hover */
+.service-card {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px -12px rgba(0, 240, 255, 0.08),
+              0 8px 24px -8px rgba(0, 0, 0, 0.4);
+}
+
+/* ────────────────────────────────────────────
+   GLOW BUTTON (Primary)
+   Gradient: primary_container → primary_fixed_dim
+   Hover: outer glow with primary token
+   ──────────────────────────────────────────── */
+.btn-glow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--primary-container), var(--primary-fixed-dim));
+  color: var(--on-primary);
+  font-weight: 700;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.2s ease,
+    filter 0.3s ease;
+}
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(219, 252, 255, 0.35),
+              0 0 40px rgba(0, 240, 255, 0.2);
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+.btn-glow:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+/* Ghost button variant */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: 0.75rem;
+  background: transparent;
+  color: var(--on-surface);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid rgba(59, 73, 75, 0.15); /* Ghost border */
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(59, 73, 75, 0.3);
+}
+
+/* ────────────────────────────────────────────
+   PULSING BADGE – "Live AI" indicator
+   Base: secondary_container (#9d05ff)
+   Ring: pulses secondary (#dfb7ff)
+   ──────────────────────────────────────────── */
+.pulsing-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pulsing-badge .badge-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--secondary-container);
+  box-shadow: 0 0 8px rgba(157, 5, 255, 0.6);
+  flex-shrink: 0;
+}
+
+.pulsing-badge .badge-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--secondary);
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%   { opacity: 0; transform: scale(0.8); }
+  50%  { opacity: 1; transform: scale(1.4); }
+  100% { opacity: 0; transform: scale(1.8); }
+}
+
+/* ────────────────────────────────────────────
+   INPUT FIELDS – Ghost Border / Underline
+   ──────────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  background: rgba(42, 42, 42, 0.4);
+  border: 1px solid rgba(59, 73, 75, 0.15); /* Ghost Border */
+  border-radius: 0.875rem;
+  padding: 0.875rem 1rem;
+  color: var(--on-surface);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.form-input::placeholder {
+  color: rgba(132, 148, 149, 0.5);
+}
+
+/* Active: border glows with primary, bg shifts to surface_bright */
+.form-input:focus {
+  border-color: rgba(219, 252, 255, 0.4);
+  background: rgba(58, 57, 57, 0.5); /* surface_bright */
+  box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.15),
+              0 0 16px rgba(0, 240, 255, 0.08);
+}
+
+/* Select specific */
+.form-input option {
+  background: #1c1b1b;
+  color: var(--on-surface);
+}
+
+/* ────────────────────────────────────────────
+   Why-Us Grid Cells
+   No dividers; use surface tonal transitions
+   ──────────────────────────────────────────── */
+.feature-cell {
+  background: var(--surface-low);   /* #1c1b1b */
+  padding: 2.5rem;
+  transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.feature-cell:nth-child(even) {
+  background: var(--surface-lowest); /* alternating tonal shift */
+}
+.feature-cell:hover {
+  background: var(--surface-high);
+}
+
+/* ────────────────────────────────────────────
+   Data Rows / Lists
+   No horizontal dividers – 24px vertical gutters
+   Alternating tonal rows
+   ──────────────────────────────────────────── */
+.data-row {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+.data-row:nth-child(odd)  { background: var(--surface-low); }
+.data-row:nth-child(even) { background: var(--surface-lowest); }
+
+/* ────────────────────────────────────────────
+   Scroll Reveal
+   ──────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ────────────────────────────────────────────
+   Mobile Menu
+   ──────────────────────────────────────────── */
+#mobile-menu {
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s ease;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+#mobile-menu.open {
+  max-height: 420px;
+  opacity: 1;
+}
+
+/* ────────────────────────────────────────────
+   Animations
+   ──────────────────────────────────────────── */
+@keyframes fadeUp {
+  0%   { opacity: 0; transform: translateY(32px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+@keyframes pulseSlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(0.90); }
+}
+@keyframes pingOnce {
+  0%   { transform: scale(1); opacity: 0.75; }
+  75%  { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-fade-up    { animation: fadeUp    0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.animate-fade-in    { animation: fadeIn    0.6s  ease forwards; }
+.animate-float      { animation: float     5s    ease-in-out infinite; }
+.animate-pulse-slow { animation: pulseSlow 3s    ease-in-out infinite; }
+.animate-ping       { animation: pingOnce  1.5s  cubic-bezier(0, 0, 0.2, 1) infinite; }
+
+.delay-100 { animation-delay: 0.10s; }
+.delay-150 { animation-delay: 0.15s; }
+.delay-300 { animation-delay: 0.30s; }
+.delay-450 { animation-delay: 0.45s; }
+.delay-600 { animation-delay: 0.60s; }
+
+/* ────────────────────────────────────────────
+   Section Transitions (Tonal – no lines)
+   surface_container_lowest → surface_container_low
+   ──────────────────────────────────────────── */
+.section-lowest { background: var(--surface-lowest); }
+.section-low    { background: var(--surface-low);    }
+.section-base   { background: var(--surface);        }
+
+/* ────────────────────────────────────────────
+   Utility – Ghost Border (accessibility fallback)
+   outline_variant (#3b494b) at 15% opacity
+   ──────────────────────────────────────────── */
+.ghost-border {
+  border: 1px solid rgba(59, 73, 75, 0.15);
+}
+
+/* ────────────────────────────────────────────
+   Neon Dot Accent (Laser Sight)
+   primary_container (#00f0ff) – small focal points
+   ──────────────────────────────────────────── */
+.laser-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--primary-container);
+  box-shadow: 0 0 8px var(--primary-container), 0 0 16px rgba(0, 240, 255, 0.4);
+  flex-shrink: 0;
+}
