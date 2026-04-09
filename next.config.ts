@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   typescript: {
-    // TypeScript hataları olsa bile build işlemini durdurma
     ignoreBuildErrors: true,
   },
   eslint: {
