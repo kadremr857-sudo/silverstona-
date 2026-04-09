@@ -16,7 +16,9 @@
     "tailwind-merge": "latest",
     "tailwindcss": "latest",
     "postcss": "latest",
-    "autoprefixer": "latest"
+    "autoprefixer": "latest",
+    "framer-motion": "latest",
+    "motion": "latest"
   },
   "devDependencies": {
     "typescript": "latest",
